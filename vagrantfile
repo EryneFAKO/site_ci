@@ -1,0 +1,79 @@
+Vagrant.configure("2") do |config|
+  # Box Ubuntu 22.04 LTS (Jammy Jellyfish)
+  config.vm.box = "ubuntu/jammy64"
+  
+  # Configuration du nom de la VM
+  config.vm.hostname = "jenkins-ci-server"
+  
+  # Configuration réseau - Port forwarding
+  # Jenkins (port 8080)
+  config.vm.network "forwarded_port", guest: 8080, host: 9000
+  # Site web (port 80)
+  config.vm.network "forwarded_port", guest: 80, host: 8081
+  
+  # Configuration de la mémoire et CPU
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "Jenkins-CI-CD"
+    vb.memory = "2048"
+    vb.cpus = 2
+  end
+  
+  # Synchronisation du dossier du site web
+  config.vm.synced_folder "./website", "/var/www/html", 
+    owner: "www-data", group: "www-data"
+  
+  # Script de provisionnement
+  config.vm.provision "shell", inline: <<-SHELL
+    # Mise à jour du système
+    echo "=== Mise à jour du système ==="
+    apt-get update
+    
+    # Installation de Java (requis pour Jenkins)
+    echo "=== Installation de Java 17 ==="
+    apt-get install -y openjdk-17-jdk
+    
+    # Ajout du repository Jenkins
+    echo "=== Ajout du repository Jenkins ==="
+    curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | tee \
+      /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+    echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+      https://pkg.jenkins.io/debian-stable binary/ | tee \
+      /etc/apt/sources.list.d/jenkins.list > /dev/null
+    
+    # Installation de Jenkins
+    echo "=== Installation de Jenkins ==="
+    apt-get update
+    apt-get install -y jenkins
+    
+    # Démarrage de Jenkins
+    systemctl start jenkins
+    systemctl enable jenkins
+    
+    # Installation d'Apache
+    echo "=== Installation d'Apache ==="
+    apt-get install -y apache2
+    
+    # Configuration d'Apache
+    systemctl start apache2
+    systemctl enable apache2
+    
+    # Installation de Git
+    echo "=== Installation de Git ==="
+    apt-get install -y git
+    
+    # Permissions
+    chown -R www-data:www-data /var/www/html
+    chmod -R 755 /var/www/html
+    
+    # Affichage du mot de passe initial Jenkins
+    echo "=========================================="
+    echo "Installation terminée!"
+    echo "Jenkins sera accessible sur: http://localhost:8080"
+    echo "Site web accessible sur: http://localhost:8081"
+    echo "=========================================="
+    echo "Mot de passe initial Jenkins:"
+    sleep 10
+    cat /var/lib/jenkins/secrets/initialAdminPassword
+    echo "=========================================="
+  SHELL
+end
