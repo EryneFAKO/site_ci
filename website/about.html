@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>À Propos de ce Projet</title>
     <meta charset="UTF-8">
+    <title>À Propos de Nous</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        nav a { margin-right: 15px; text-decoration: none; color: #0056b3; }
+        h1 { color: #333; }
+    </style>
 </head>
 <body>
-    <h1>Page À Propos</h1>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="about.html">À Propos</a>
+        <a href="contact.html">Contact</a>
+    </nav>
     
-    <p>Ce projet démontre la mise en place d'une chaîne CI/CD complète :</p>
-    <ol>
-        <li>Le code source est hébergé sur **GitHub**.</li>
-        <li>Un environnement de serveur est créé par **Vagrant** et **VirtualBox**.</li>
-        <li>**Jenkins** est configuré pour récupérer, construire (Build) et déployer le code sur le serveur **Apache**.</li>
-    </ol>
+    <h1>🧐 À Propos de ce Projet</h1>
+    <p>Ce projet est un exercice de mise en place d'un environnement de travail CI/CD complet.</p>
     
-    <p><a href="index.html">Retour à l'accueil</a></p>
+    <h3>Technologies Utilisées :</h3>
+    <ul>
+        <li>**Vagrant & VirtualBox :** Pour la création de la machine virtuelle.</li>
+        <li>**Jenkins :** Le serveur d'automatisation CI/CD.</li>
+        <li>**Git & GitHub :** Le dépôt de code source.</li>
+        <li>**Apache :** Le serveur web de déploiement (le "serveur de production").</li>
+    </ul>
 </body>
 </html>

@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Accueil du Site CI/CD</title>
     <meta charset="UTF-8">
+    <title>Accueil du Site CI/CD</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
+        nav a { margin-right: 15px; text-decoration: none; color: #0056b3; }
+        h1 { color: #333; }
+    </style>
 </head>
 <body>
-    <h1>Bienvenue sur notre Plateforme CI/CD !</h1>
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="about.html">À Propos</a>
+        <a href="contact.html">Contact</a>
+    </nav>
     
-    <p>Ceci est la version initiale de la page d'accueil. Elle sera déployée automatiquement par Jenkins.</p>
+    <h1>🚀 Bienvenue sur le site déployé par Jenkins !</h1>
+    <p>Ceci est la page d'accueil de notre application simple, gérée par notre pipeline d'Intégration et de Livraison Continue (CI/CD) sur Vagrant.</p>
     
-    <h2>Navigation :</h2>
-    <ul>
-        <li><a href="about.html">Aller à la page "À propos"</a></li>
-        <li><a href="contact.html">Aller à la page "Contact"</a></li>
-    </ul>
-
-    <footer>
-        <p>&copy; 2025 Projet CI/CD Jenkins/Vagrant</p>
-    </footer>
+    <p>Si vous voyez ce message, le déploiement sur Apache fonctionne correctement.</p>
 </body>
 </html>

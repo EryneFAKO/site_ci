@@ -62,8 +62,8 @@ Vagrant.configure("2") do |config|
     apt-get install -y git
     
     # Permissions
-    chown -R www-data:www-data /var/www/html
-    chmod -R 755 /var/www/html
+    chown -R jenkins:jenkins /var/www/html
+    chmod -R 775 /var/www/html
     
     # Affichage du mot de passe initial Jenkins
     echo "=========================================="
