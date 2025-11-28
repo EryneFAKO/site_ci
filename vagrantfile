@@ -19,8 +19,8 @@ Vagrant.configure("2") do |config|
   end
   
   # Synchronisation du dossier du site web
-  config.vm.synced_folder "./website", "/var/www/html", 
-    owner: "www-data", group: "www-data"
+  #config.vm.synced_folder "./website", "/var/www/html", 
+  #owner: "www-data", group: "www-data"
   
   # Script de provisionnement
   config.vm.provision "shell", inline: <<-SHELL
